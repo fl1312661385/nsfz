@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	<mapper namespace="com.bysj.work.nsfz.dao.ShopCartDao">
+		
+		<select id="getUserAddress" resultType="com.bysj.work.nsfz.model.UserAddress">
+	       
+	        SELECT * from nsfz_address,nsfz_user WHERE nsfz_address.userId=#{userId} and nsfz_user.userId=#{userId}
+	    </select>
+		
+		
+	</mapper>

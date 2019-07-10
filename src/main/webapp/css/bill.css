@@ -1,0 +1,72 @@
+*{margin: 0;
+    	padding: 0;
+    	list-style: none;
+    	text-decoration: none;
+    }
+ .bill-content{
+ 	width:1200px;
+ 	height:550px;
+ 	
+ 	margin-left: 8%;
+ }
+ .bigbill{
+ 	text-align:center;
+ }
+ .bill-search{
+    background-color: #F5F5F7;
+ 	width: 100%;
+    height: 8%;
+    margin-top: 2px;
+ 
+ }
+ .bill-details{
+ 	width:100%;
+ 	height:85%;
+ 
+ }
+ .bill-kuang{
+     color: gold;
+    border-color: blue;
+    border-radius: 5px;
+    height: 36px;
+ }
+.bill-details label{
+   color: #CFB2EF;
+    font-size: 30px;
+ }
+ .bill-title{
+ 	    font-size: 20px;
+    margin-top: 6px;
+    color: firebrick;
+ }
+ .bill-product{
+ 	color:black;
+ 	font-size:20px;
+ 
+ }
+ .bill-list{
+     margin-left: 26px;
+	width: 30%;
+    height: 400px;
+    border-radius: 5%;
+    border: 1px solid orange;
+    float: left;
+ }
+ .bill-foot{
+ 	float:left;
+ 	width:100%;
+ 	height:80px;
+ 	margin-top: 10px;
+ }
+ .bill-st{
+     font-family: monospace;
+    font-style: italic;
+    color: saddlebrown;
+    font-size: 30px;
+    font-weight: bold;
+ }
+ 
+ 
+ 
+ 
+ 

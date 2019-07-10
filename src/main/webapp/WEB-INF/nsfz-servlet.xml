@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+	<!-- 包扫描 -->
+	<context:component-scan
+		base-package="com.bysj.work.nsfz.web" />
+		
+	<!-- mvc注解驱动 -->
+	<mvc:annotation-driven />
+	
+	<!-- 视图解析器 ，支持多种视图 -->
+	<bean
+		class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
+		<property name="viewResolvers">
+			<list>
+				<bean
+					class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+					<property name="viewClass"
+						value="org.springframework.web.servlet.view.JstlView" />
+					<property name="prefix" value="/WEB-INF/jsp/" />
+					<property name="suffix" value=".jsp" />
+				</bean>
+				<bean
+					class="org.springframework.web.servlet.view.BeanNameViewResolver" />
+			</list>
+		</property>
+		<property name="defaultViews">
+			<list>
+				<bean
+					class="org.springframework.web.servlet.view.json.MappingJackson2JsonView"></bean>
+			</list>
+		</property>
+	</bean>
+	<mvc:interceptors>
+        <mvc:interceptor>
+            <!-- 拦截所有的请求，这个必须写在前面，也就是写在【不拦截】的上面 -->
+            <mvc:mapping path="/**" />
+            <!-- 但是排除下面这些，也就是不拦截请求 -->
+            <mvc:exclude-mapping path="/login" />
+            <mvc:exclude-mapping path="/checkmyMobile" />
+            <mvc:exclude-mapping path="/logintofirst" />
+          	<mvc:exclude-mapping path="/login_no" />
+          	<mvc:exclude-mapping path="/register" />
+            <mvc:exclude-mapping path="/register_no" />
+            <mvc:exclude-mapping path="/forgetpassword" />
+            <mvc:exclude-mapping path="/changePassword" />
+            <mvc:exclude-mapping path="/about" /> 
+            <mvc:exclude-mapping path="/buytoday" />
+            <mvc:exclude-mapping path="/commodity" />
+            <mvc:exclude-mapping path="/information" />
+            <mvc:exclude-mapping path="/specific" />
+            <mvc:exclude-mapping path="/details" />
+            <mvc:exclude-mapping path="/tharm" />
+        	<mvc:exclude-mapping path="/loose" />
+        	<mvc:exclude-mapping path="/fuxie" />
+        	<mvc:exclude-mapping path="/babyjump" />
+            <mvc:exclude-mapping path="/**/*.css"/>
+	        <mvc:exclude-mapping path="/**/*.js"/>
+	        <mvc:exclude-mapping path="/**/*.jpg"/>
+	        <mvc:exclude-mapping path="/**/*.png"/>
+	        <mvc:exclude-mapping path="/layui/**"/>
+	        <mvc:exclude-mapping path="/laydate/**"/>
+	         <mvc:exclude-mapping path="WEB-INF/jsp/login.jsp"/>
+            <mvc:exclude-mapping path="/WEB-INF/jsp/paysuccess.jsp"/>
+            <bean class="com.bysj.work.nsfz.util.LoginInterceptor" />
+        </mvc:interceptor>
+    </mvc:interceptors>
+
+	<!-- 静态资源处理 -->
+	<mvc:resources location="/WEB-INF/jsp/" mapping="/jsp/**"/>
+	<mvc:resources location="/img/" mapping="/img/**"/>
+	<mvc:resources location="/css/" mapping="/css/**"/>
+	<mvc:resources location="/js/" mapping="/js/**"/>
+	<mvc:resources location="/laydate/" mapping="/laydate/**"/>
+	<mvc:resources location="/layui/" mapping="/layui/**"/>
+	<mvc:resources location="/jsp/" mapping="/jsp/**"></mvc:resources>
+
+</beans>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	<mapper namespace="com.bysj.work.nsfz.dao.ShopCartDao">
+	
+	
+<!-- 	<resultMap type="com.jbjf.work.fourierbackstage.model.User" id="userMap"> -->
+<!-- 		<id column="user_id" property="userId"/> -->
+<!-- 		<result column="create_time" property="createTime"/> -->
+		
+<!-- 	添加一个商品到购物车 -->
+		<insert id="addoneproduct">
+				INSERT INTO nsfz_shopcart (userId,productId,productName,quantity,isDelete)
+		 VALUES(#{userId},#{productId},#{productName},#{quantity},0)
+		</insert>
+		
+		<select id="find" resultType="com.bysj.work.nsfz.model.ShopCart">
+				SELECT * FROM nsfz_shopcart WHERE userId=#{userId} and productId=#{productId} and isDelete=0
+		</select>
+<!-- 	更新购物车单个商品数量 -->
+		<update id="changequantity">
+		UPDATE nsfz_shopcart SET quantity=#{nowproductcount} WHERE userId=#{userId} and productId=#{productId}
+		</update>
+<!-- 		得到一个用户的购物车信息 -->
+		<select id="getCartInformation" resultType="com.bysj.work.nsfz.model.UserCart">
+		SELECT * FROM nsfz_shopcart,nsfz_product WHERE nsfz_shopcart.productId=nsfz_product.productId AND nsfz_shopcart.userId=#{userId} and isDelete=0
+		</select>
+		
+		<update id="deletecart">
+		UPDATE nsfz_shopcart SET isDelete=1 WHERE userId=#{userId} and productId=#{productId}
+		</update>
+		
+		<delete id="removeCart">
+		DELETE from nsfz_shopcart WHERE nsfz_shopcart.userId=#{userId}
+		</delete>
+		
+		
+		
+	</mapper>

@@ -1,0 +1,32 @@
+
+.paypasswoord{
+	width: 1200px;
+	 margin:0 auto;
+	height: 100px;
+
+	}
+.payl{
+	float:left;
+	width: 300px;
+	height: 100px;
+	
+	
+}	
+
+.thick {
+	top:6px;
+	position:relative;
+
+
+	line-height: 1.5em;
+    font-family: "Times New Roman", Times, serif;
+	font-size: 30px;
+    color: #000000;
+}
+.payr{
+	float:left;
+	width: 900px;
+	height: 100px;
+
+	
+}	

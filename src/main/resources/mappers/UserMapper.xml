@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	<mapper namespace="com.bysj.work.nsfz.dao.UserDao">
+	
+	
+<!-- 	<resultMap type="com.jbjf.work.fourierbackstage.model.User" id="userMap"> -->
+<!-- 		<id column="user_id" property="userId"/> -->
+<!-- 		<result column="create_time" property="createTime"/> -->
+		
+	<select id="find" resultType="com.bysj.work.nsfz.model.User">
+	        select * from nsfz_user where mobile=#{mobile}  and password=#{password} 
+	    </select>
+	
+<insert id="insert" useGeneratedKeys="true" keyProperty="userId">
+		INSERT INTO nsfz_user (mobile,userName,password,useType)
+ VALUES(#{mobile},#{userName},#{password},0)
+	</insert>
+		
+		
+		<select id="getUserById" resultType="com.bysj.work.nsfz.model.User">
+		
+			select * from nsfz_user where userId=#{userId}
+		
+		</select>
+		
+		<update id="changeUserById">
+		UPDATE nsfz_user SET userName=#{userName},mobile=#{mobile} WHERE userId=#{userId}
+		
+		</update>
+		
+		
+		<select id="checkMobile" resultType="com.bysj.work.nsfz.model.User">
+		
+			select * from nsfz_user where mobile=#{mobile}
+		
+		</select>
+		
+		<update id="changePasswordByPhone">
+		
+			UPDATE nsfz_user SET password=#{password} WHERE mobile=#{mobile}
+		</update>
+		
+		
+		
+		
+		
+		
+		
+	</mapper>

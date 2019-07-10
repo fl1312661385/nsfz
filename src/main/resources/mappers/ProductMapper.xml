@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	<mapper namespace="com.bysj.work.nsfz.dao.ProductDao">
+	
+	
+<!-- 	<resultMap type="com.jbjf.work.fourierbackstage.model.User" id="userMap"> -->
+<!-- 		<id column="user_id" property="userId"/> -->
+<!-- 		<result column="create_time" property="createTime"/> -->
+		
+	<select id="getProductInformation" resultType="com.bysj.work.nsfz.model.Product">
+	        select * from nsfz_product where productId=#{productId} AND nsfz_product.show = 0 
+	    </select>
+	<select id="getKindofProduct" resultType="com.bysj.work.nsfz.model.Product">
+	        select * from nsfz_product where type=#{type} AND nsfz_product.show = 0
+	    </select>
+	    
+	    <select id="getAllProduct" resultType="com.bysj.work.nsfz.model.Product">
+	        select * from nsfz_product WHERE nsfz_product.show=0
+	    </select>
+	
+<!-- 		搜索部分商品 -->
+
+	<select id="searchproduct" parameterType="string" resultType="com.bysj.work.nsfz.model.Product">
+	SELECT * FROM nsfz_product where (nsfz_product.description like '%${title}%' OR nsfz_product.productName like '%${title}%') 
+		AND nsfz_product.show = 0
+    
+	
+	</select>
+	<select id="getOneproduct" resultType="com.bysj.work.nsfz.model.Product">
+		SELECT * FROM nsfz_product WHERE productId=#{productId}
+	</select>
+	
+	
+	
+	
+	</mapper>

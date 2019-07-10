@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	<mapper namespace="com.bysj.work.nsfz.dao.CommentDao">
+	
+	<insert id="insert">
+	INSERT into nsfz_comment (commentId,userId,productId,content,commentDate,commentTime,state) 
+		VALUES(#{commentId},#{userId},#{productId},#{content},#{commentDate},#{commentTime},0);
+	
+	</insert>
+
+	<select id="getCommentByPid" resultType="com.bysj.work.nsfz.model.Comment">
+	SELECT * from nsfz_comment,nsfz_user WHERE productId=#{productId} and nsfz_comment.userId=nsfz_user.userId
+	</select>
+	
+	</mapper>

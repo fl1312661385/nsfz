@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	<mapper namespace="com.bysj.work.nsfz.dao.BillDao">
+	
+	<insert id="insert">
+	INSERT into nsfz_bill(userId,orderId,creatTime)
+VALUES (#{userId},#{orderId},#{creatTime})
+	</insert>
+	
+	<select id="getAllBill" resultType="com.bysj.work.nsfz.model.BillOrder">
+	SELECT * FROM nsfz_bill b,nsfz_order o WHERE b.orderId=o.orderId and b.userId=#{userId} and creatTime =#{creatTime};
+	</select>
+	
+	<select id="getBillBycreatTime" resultType='String'>
+	SELECT creatTime FROM nsfz_bill WHERE userId=#{userId} GROUP BY creatTime 
+	</select>
+	
+	<delete id="del">
+	
+	DELETE FROM nsfz_bill WHERE nsfz_bill.orderId=#{orderId}
+	</delete>
+	
+	<delete id="delBybillId">
+	
+	DELETE FROM nsfz_bill WHERE nsfz_bill.billId=#{billId}
+	</delete>
+	 
+	
+	
+	
+	
+	</mapper>

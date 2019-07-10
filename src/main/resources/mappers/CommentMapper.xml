@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	<mapper namespace="com.bysj.work.nsfz.dao.CommentDao">
+	
+	<insert id="insert">
+	INSERT into nsfz_comment(userId,replyName,productId,content,commentDate,commentTime,state,commentParentId,commentName)
+VALUES (#{userId},#{replyName},#{productId},#{content},#{commentDate},#{commentTime},0,#{commentParentId},#{commentName})
+	</insert>
+	
+	<select id="getCommentByPid" resultType="com.bysj.work.nsfz.model.Comment">
+	SELECT
+	*
+FROM
+	nsfz_comment c,nsfz_user u
+WHERE productId=#{productId} AND c.userId=u.userId and c.commentParentId=0
+	</select>
+	
+	<select id="getCommentReplay" resultType="com.bysj.work.nsfz.model.CommentReplay">
+SELECT
+	c.commentId,
+	c.userId,
+	u.userName,
+	c.content,
+	c.commentDate,
+	c.commentTime,
+	c.commentParentId,
+	b.commentId commentId1,
+	b.userId user1,
+	z.userName userName1,
+	b.content content1,
+	b.commentDate commentDate1,
+	b.commentTime commentTime1,
+	b.commentParentId commentParentId1
+FROM
+	nsfz_comment c,
+	nsfz_comment b,
+	nsfz_user u,
+	nsfz_user z
+WHERE
+	u.userId = c.userId
+AND z.userId = b.userId
+AND c.commentId = b.commentParentId
+AND c.productId =  #{productId};
+
+	</select>
+	<!-- list传参 -->
+	<select id="findByCommentParentId" parameterType="java.util.List" resultType="com.bysj.work.nsfz.model.Comment">
+	SELECT * FROM nsfz_comment WHERE commentId in 
+	<foreach collection="list" index="index" item="item" open="(" separator="," close=")">  
+            #{item}  
+        </foreach>
+       order by 
+		  field(
+		  commentId,
+		  <foreach collection="list" index="index" item="item"   separator=","    >
+		    #{item}  
+		  </foreach> 
+		  )
+
+	</select>
+	
+	
+	<select id="getReplyName" resultType="String">
+		SELECT c.replyName from nsfz_comment c WHERE commentId=#{commentId}
+	</select>
+	
+		
+	</mapper>
